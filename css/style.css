@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+#canvas {
+    width: 40vw;
+    height: 100vh;
+    resize: both;
+    overflow: auto;
+}
+
+.start_btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 60vh;
+    width: 6.7vw;
+    height: 6vh;
+    background: transparent;
+    cursor: pointer;
+    border: 5px solid black;
+}
+
