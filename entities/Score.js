@@ -8,12 +8,14 @@ class Score {
         this._result = [0];
         this._bestScoreArr = [this._bestScore];
         this._bestResult = [0];
+        
         // getting x-coordinate variable for drawing current score
         this._floatingCurrentScoreX = this._config.centerX - this._config.scoreSize.width / 2;
         // getting x-coordinate variable for drawing last score
         this._floatingLastScoreX = this._config.centerX - this._config.finalScoreSize.width / 2;
         // getting x-coordinate variable for drawing best score
         this._floatingBestScoreX = this._config.centerX - this._config.finalScoreSize.width / 2;
+        // moving best score digits to center
         if(this._bestScore > 9) {
             this._floatingBestScoreX = this._config.centerX;
         }
@@ -23,6 +25,11 @@ class Score {
     }
 
     updateScore() {
+        // drawing best score equal 0 if playing very first time
+        if(this._bestScore === null) {
+            this._bestScoreArr = [0];
+        }
+        // updating current and best score
         if(this._bird._bird.x + this._config.bird.width === this._pipes._firstPipeX + this._config.upperPipe.width / 2 ||
         this._bird._bird.x + this._config.bird.width === this._pipes._secondPipeX + this._config.upperPipe.width / 2) {
             this._config.score++;
@@ -32,6 +39,8 @@ class Score {
             if(this._config.score > this._bestScore) {
                 this._bestScore = this._config.score;
                 localStorage.setItem('bestScore', this._bestScore);
+                this._bestScoreArr.pop();
+                this._bestScoreArr.push(this._bestScore);
             }
             if(this._config.score === 10) {
                 this._floatingCurrentScoreX = this._config.centerX;
@@ -45,10 +54,11 @@ class Score {
                 alert('YOU HAVE REACHED THE MAXIMUM SCORE !!!');
                 this._config.endGame();
             }
-        }
+        } 
     }
 
     drawCurrentScore() {
+        console.log(this._bird._bird.x + this._config.bird.width, '', this._pipes._firstPipeX + this._config.upperPipe.width);
         this._config.ctx.drawImage(
             this._config.img,
 
@@ -70,6 +80,7 @@ class Score {
         }
     }
 
+    // drawing score part
     drawSecondCurrentScore() {
         this._config.ctx.drawImage(
             this._config.img,
@@ -250,7 +261,7 @@ class Score {
             this.drawThirdBestScore();
         }
     }
-
+    // drawing buttons for start and restart
     drawStartBtn() {
         this._config.ctx.drawImage(
             this._config.img,
@@ -259,6 +270,22 @@ class Score {
             this._config.startBtnSource.y,
             this._config.startBtnSource.width,
             this._config.startBtnSource.height,
+
+            this._config.startBtn.x,
+            this._config.startBtn.y,
+            this._config.startBtn.width,
+            this._config.startBtn.height
+        );
+    }
+
+    drawRestartBtn() {
+        this._config.ctx.drawImage(
+            this._config.restartImg,
+
+            this._config.restartBtnSource.x,
+            this._config.restartBtnSource.y,
+            this._config.restartBtnSource.width,
+            this._config.restartBtnSource.height,
 
             this._config.startBtn.x,
             this._config.startBtn.y,

@@ -17,11 +17,12 @@ class Pipes {
         this._holeBetweenPipes = config.holeBetweenPipes;
         this._firstPipeX = config.firstPipeX; 
         this._secondPipeX = config.secondPipeX;
-        this._pipesArray = [];
-        this._pipesArray2 = [];
+        this._pipesArray = config.pipesArray;
+        this._pipesArray2 = config.pipesArray2;
         this._SPEED = config.SPEED;
     }
-
+    
+    // getting random pipes height
     randomPipesHeight() {
         this._randomHeight = Math.floor(Math.random() * (this._upperBackgroundHeight * 0.45 - this._upperBackgroundHeight * 0.15) + this._upperBackgroundHeight * 0.15);
         this._pipesArray.push(this._randomHeight);
@@ -29,6 +30,7 @@ class Pipes {
         return this._pipesArray, this._pipesArray2; 
     }
 
+    // pipes x-coordinate drawing formulas
     countFirstPipeX() {
         this._firstPipeX -= Math.floor(0.3 * this._config.SPEED);
         if (this._firstPipeX + this._upperPipe.width <= 0) {
@@ -46,6 +48,7 @@ class Pipes {
     }
 
     drawUpperPipe() {
+        // drawing an upper pipe
         this.randomPipesHeight();
         // frame animation variable
         this._index += 0.3
@@ -81,7 +84,7 @@ class Pipes {
             this._pipesArray2[1]
         );
 
-        // draw upper pipe extension
+        // drawing an upper pipe extension
         this._ctx.drawImage(
             this._img,
 
@@ -141,6 +144,7 @@ class Pipes {
             this._lowerPipeExtension.height
         );
 
+        // drawing a lower pipe
         this._ctx.drawImage(
             this._img,
     

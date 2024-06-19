@@ -2,17 +2,22 @@ class Config {
     constructor() {
 
         this.spriteSheet = './source/spriteSheet.png';
+        this.restartBtnSpriteSheet = './source/restartBtn.png';
         this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext('2d');
         this.img = new Image();
+        this.restartImg = new Image();
+        this.restartImg.src = this.restartBtnSpriteSheet;
         this.img.src = this.spriteSheet;
         this.btn = document.querySelector('.start_btn');
         this.btn.style = 'display: none';
-
+        // variables and arrays for counting pipes x-coordinates
         this.firstPipeX = this.canvas.width * 3;
         this.secondPipeX = this.canvas.width * 3.6;
         this.pipesArray = [];
         this.pipesArray2 = [];
+        // game score
+        this.score = 0;
 
         // frame animation variable
         this.index = 0;
@@ -149,9 +154,9 @@ class Config {
             x: this.centerX - this.upperPipe.width / 2,
             y: this.centerY - (this.holeBetweenPipes * 0.2) / 2
         }
-
-        this.score = 0;
-
+        
+        // score part
+        
         this.scoreSprites = [
             {
                 x: 288,
@@ -247,6 +252,24 @@ class Config {
             y: this.canvas.height * 0.6,
             width: this.canvas.width / 6,
             height: this.canvas.height * 0.06
+        }
+
+        this.restartBtnSource = {
+            x: 21,
+            y: 16,
+            width: 164,
+            height: 53,
+        }
+
+        this.restartBtn = {
+            sx: 21,
+            sy: 16,
+            sWidth: 164,
+            sHeight: 53,
+            dx: this.centerX - (this.canvas.width / 6) / 2,
+            dy: this.canvas.height * 0.6,
+            dWidth: this.canvas.width / 6,
+            dHeigt: this.canvas.height * 0.06
         }
     }
 

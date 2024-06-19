@@ -12,7 +12,7 @@ class Bird {
         this._upperBackgroundHeight = config.upperBackgroundHeight;
         this._endGame = config.endGame;
         this._index = config.index;
-
+        // variables for drawing bird angles and physics
         this._velocity = 0;
         this._gravity = 0.5;
         this._lift = -8;
@@ -21,28 +21,12 @@ class Bird {
         this._birdFlapping = 0;
 
         this._angle = 0;
-
-        this.handleMouseDown = (event) => {
-            if (event.type === 'mousedown') {
-                this._velocity = this._lift;
-            }
-        };
-        this.handleSpacePress = (event) => {
-            if (event.key === ' ') {
-                this._velocity = this._lift;
-            }
-        };
     }
-
-    inputHandler() {
-            document.addEventListener('mousedown', this.handleMouseDown);
-            document.addEventListener('keydown', this.handleSpacePress);
-        }
 
     updateBird() {
         this._velocity += this._gravity;
         this._bird.y += this._velocity;
-
+        // calculating the rendering of the bird's angle
         if(this._velocity < 0) {
             this._birdFlapping += 0.2;
         }
@@ -61,6 +45,23 @@ class Bird {
         if(this._angle > 30) {
             this._index = 1;
         }
+    }
+
+    // drawing a bird start screen position
+    drawBirdAtStart() {
+        this._birdFlapping += 0.1;
+        this._index = Math.floor(this._birdFlapping % 4);
+        this._ctx.drawImage(
+            this._img,
+            this._birdFrames[this._index].x,
+            this._birdFrames[this._index].y,
+            this._bird.sourceWidth,
+            this._bird.sourceHeight,
+            this._centerX - this._bird.width,
+            this._centerY - this._bird.height / 2,
+            this._bird.width,
+            this._bird.height
+        );
     }
 
     // drawing a bird

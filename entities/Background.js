@@ -14,7 +14,7 @@ class Background {
     // drawing a background
     drawBackground() {
         // frame animation variable
-        this._index += 0.3
+        this._index += 0.26
 
         // backgroundX movement formula
         this._movingBackgroundX = -((this._index * this._config.SPEED) % this._canvas.width);
